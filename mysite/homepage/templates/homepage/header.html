@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>teachUsHub</title>
+	<meta charset="utf-8">
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/grid.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<div class="wrapper">
+
+        <!-- BEGIN Sidebar -->
+        <nav id="sidebar">
+        <div class="sidebar-header">
+            <h1 class="site-title">
+            <img class="imglogo" src="{% static 'img/logo.jpg'%}"><br/>
+            teachUsHub </h1>
+        </div>
+        <ul class="list-unstyled components">
+            <p>
+                Learning Made Digital
+            </p>
+            <li class="active">
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>
+            <ul class="collapse list-unstyled" id="homeSubmenu">
+                <li><a href="#">Home 1</a></li>
+                <li><a href="#">Home 2</a></li>
+                <li><a href="#">Home 3</a></li>
+            </ul>
+            </li>
+            <li>
+            <a href="#">About</a>
+            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
+            <ul class="collapse list-unstyled" id="pageSubmenu">
+                {% for course in object_list %}
+                    <li><a href="{% url 'courses:detail' course.id %}">{{ course.courseName }}</a></li>
+                {% endfor %}
+            </ul>
+            </li>
+            <li>
+            <a href="/courses">Courses</a>
+            </li>
+            <li>
+            <a href="/accounts/login_user">Login</a>
+            </li>
+        </ul>
+        <div class="sidebar-footer">
+            <p class="social-icons">
+                <a target="_blank" href="#"><i class="fa fa-youtube"></i></a>
+                <a target="_blank" href="#"><i class="fa fa-soundcloud"></i></a>
+                <a target="_blank" href="#"><i class="fa fa-facebook"></i></a>
+                <a target="_blank" href="#"><i class="fa fa-twitter"></i></a>
+                <a target="_blank" href="#"><i class="fa fa-google-plus"></i></a>
+            </p>
+            <p>
+                Web Design by <a target="_blank" href="#">RMaC Web Solutions</a>
+            </p>
+        </div>
+        </nav>
+      <!-- END Sidebar -->
+
+      <!-- BEGIN Responsive Menu Button -->
+        <nav id="sidebar-responsive" class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <!-- Your website title here -->
+          <h1 class="mobile-title">teachUsHub</h1>
+                <button type="button" id="sidebarCollapse" class="navbar-btn pull-right">
+                <span></span>
+                <span></span>
+                <span></span>
+                </button>
+                <div class="clearfix">
+                </div>
+            </div>
+        </div>
+        </nav>
+      <!-- End Responsive Menu Button -->
+        <div id="content">
+        {% block content %}
+        {% endblock %}
+        </div>
+    </div>
+    <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/common.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/functions.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/perfect-scrollbar.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/tether.min.js' %}"></script>
+</body>
+</html>

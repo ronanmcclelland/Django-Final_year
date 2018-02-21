@@ -1,0 +1,27 @@
+{% extends 'homepage/header.html' %}
+
+{% block content %}
+<div class="row intro">
+    <div class="col-md-4">
+        <img class="thumbnail" src="{{ course.course_logo.url }}" alt="{{ course.courseName }}">
+    </div>
+    <div class="col-md-8">
+        <h1>{{ course.courseName }}</h1>
+        <h3>{{ course.field }}</h3>
+        <p>{{ course.courseDesc }}</p>
+        <a class="float-lg-right btn addBtn" href="{% url 'courses:create_lesson' course.id %}">Add Lesson</a>
+    </div>
+</div>
+{% if error_message %}
+    <p><strong>{{error_message}}</strong></p>
+{% endif %}
+<div class="row">
+    <ul>
+        {% for lesson in course.lesson_set.all %}
+        <li>{{lesson.lesson_title}}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+
+{% endblock %}

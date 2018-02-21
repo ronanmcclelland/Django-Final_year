@@ -1,0 +1,27 @@
+{% extends "homepage/header.html" %}
+
+{% block content %}
+
+        {% if courses %}
+            <div class="card-columns">
+            {% for course in courses %}
+                    <div class="card">
+                        <img class="card-img-top img-fluid" src="{{ course.course_logo.url }}" alt="Card image cap">
+                        <div class="card-block">
+                          <h2 class="card-title">{{ course.field }}</h2>
+                          <p class="card-text">{{ course.courseDesc }}</p>
+                        </div>
+                     </div>
+
+            {% endfor %}
+            </div>
+        {% else %}
+                <div class="col-sm-12">
+                    <h1>No Courses</h1>
+                </div>
+        {% endif %}
+
+
+
+  <!-- END Page Content -->
+{% endblock %}
