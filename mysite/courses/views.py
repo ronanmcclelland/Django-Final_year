@@ -3,7 +3,7 @@ from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Course, Lesson
 from django.db.models import Q
-from .forms import LessonForm
+from .forms import LessonForm, CourseForm
 
 
 def index(request):
@@ -29,6 +29,22 @@ def index(request):
             return render(request, 'courses/index.html', {'courses': courses})
 
 
+def create_course(request):
+    if not request.user.is_authenticated():
+        return render(request, 'courses/login.html')
+    else:
+        form = CourseForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            course = form.save(commit=False)
+            course.user = request.user
+            course.save()
+            return render(request, 'courses/detail.html', {'course': course})
+        context = {
+            "form": form,
+        }
+        return render(request, 'courses/create_course.html', context)
+
+
 def create_lesson(request, course_id):
     form = LessonForm(request.POST or None, request.FILES or None)
     course = get_object_or_404(Course, pk=course_id)
@@ -45,7 +61,7 @@ def create_lesson(request, course_id):
         lesson = form.save(commit=False)
         lesson.course = course
         lesson.save()
-        return render(request, 'courses/detail.html', {'courses': course})
+        return render(request, 'courses/detail.html', {'course': course})
     context = {
         'course': course,
         'form': form,
@@ -57,14 +73,9 @@ def delete_course(request, course_id):
     course1 = Course.objects.get(pk=course_id)
     course1.delete()
     courses1 = Course.objects.filter(user=request.user)
-    return render(request, 'course/index.html', {'courses': courses1})
+    return render(request, 'courses/index.html', {'courses': courses1})
 
 
 class DetailView(generic.DetailView):
     model = Course
     template_name = 'courses/detail.html'
-
-
-class CourseCreate(CreateView):
-    model = Course
-    fields = ['courseName', 'length', 'field', 'course_logo', 'courseDesc']

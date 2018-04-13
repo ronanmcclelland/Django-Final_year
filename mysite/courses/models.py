@@ -4,15 +4,12 @@ from django.contrib.auth.models import Permission, User
 
 
 class Course(models.Model):
-    user = models.ForeignKey(User, default=1)
+    user = models.ForeignKey(User)
     courseName = models.CharField(max_length=200)
     length = models.CharField(max_length=100)
     field = models.CharField(max_length=100)
     course_logo = models.FileField()
     courseDesc = models.CharField(max_length=500)
-
-    def get_absolute_url(self):
-        return reverse('courses:detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.courseName + ' - ' + self.length

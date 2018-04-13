@@ -207,6 +207,9 @@ h1.site-title {
     background: #7c6dcc;
     color: #fff;
 }
+.form-horizontal input{
+    width: 100%;
+}
 /* --------------------------------------------------- Media QUERIES----------------------------------------------------- */
 @media (max-width:768px) {
 	#sidebar-responsive {
