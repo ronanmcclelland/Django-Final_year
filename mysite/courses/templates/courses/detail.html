@@ -15,13 +15,40 @@
 {% if error_message %}
     <p><strong>{{error_message}}</strong></p>
 {% endif %}
+
 <div class="row">
-    <ul>
+    <ul class="nostyle">
         {% for lesson in course.lesson_set.all %}
-        <li>{{lesson.lesson_title}}</li>
+        <div class="col-sm-4">
+            <div class="thumbnail overflowhid">
+                <div class="caption">
+                    <h2>{{lesson.lesson_title}}</h2>
+
+                    <a href="{% url 'courses:lesson_detail' course.id lesson.id %}" class="btn btn-primary btn-sm" role="button">View Lesson</a>
+
+                    <form action="{% url 'courses:delete_lesson' course.id lesson.id %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="course_id" value="lesson.id" />
+                        <button type="submit" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        {% cycle '' '' '' '' '' '<div class="clearfix"></div>' %}
         {% endfor %}
     </ul>
 </div>
 
+<!--{% load favorite_tags %}  &lt;!&ndash; Loading the template tag &ndash;&gt;-->
+<!--{% get_fav_count object %}  &lt;!&ndash; Include the number of people 'favorited' a certain object &ndash;&gt;-->
 
+<!--&lt;!&ndash; authentication is required for users to use our functionality, however there's an implemented tag for unauthenticated users &ndash;&gt;-->
+<!--{% if user.is_authenticated %}-->
+	<!--{%  get_fav object user %}  &lt;!&ndash; for unauthenticated users &ndash;&gt;-->
+<!--{% else %}-->
+	<!--{% get_fav_nouser object request %} &lt;!&ndash; for authenticated users &ndash;&gt;-->
+<!--{% endif %}-->
 {% endblock %}

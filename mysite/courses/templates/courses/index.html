@@ -3,19 +3,21 @@
 <div id="wrapper">
     <a class="float-lg-right btn addBtn" href="{% url 'courses:course-add' %}">Add Course</a>
     <div class="row">
-        <div class="col-sm-12">
-            <h3>{{ user.username }}'s Courses</h3>
-        </div>
+        <!--<div class="col-sm-12">-->
+            <!--<h3>{{ user.username }}'s Courses</h3>-->
+        <!--</div>-->
         {% if courses %}
         {% for course in courses %}
-        <div class="col-sm-4 col-lg-2">
+        <div class="col-sm-4">
             <div class="thumbnail">
                 <a href="{% url 'courses:detail' course.id %}">
-                    <img src="{{ course.course_logo.url }}" class="img-responsive">
+                    <div class="backgroundimg" style="background-image:url({{ course.course_logo.url }})">
+
+                    </div>
+
                 </a>
                 <div class="caption">
                     <h2>{{ course.courseName }}</h2>
-                    <h4>{{ course.length }}</h4>
 
                     <!-- View Details -->
                     <a href="{% url 'courses:detail' course.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
@@ -38,55 +40,139 @@
         <div class="col-sm-12">
             <h2>Looks like your new here</h2>
         </div>
-        <form class="modal multi-step" id="demo-modal-3">
+        <div class="modal show" id="myModal" role="dialog">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title step-1" data-step="1">Step 1</h4>
-                <h4 class="modal-title step-2" data-step="2">Step 2</h4>
-                <h4 class="modal-title step-3" data-step="3">Final Step</h4>
-                <div class="m-progress">
-                    <div class="m-progress-bar-wrapper">
-                        <div class="m-progress-bar">
+
+      <div class="container">
+    <div class="row">
+        <div class="board">
+            <ul class="nav nav-tabs">
+                <div class="liner"></div>
+                <li rel-index="0" class="active">
+                    <a href="#step-1" class="btn" aria-controls="step-1" role="tab" data-toggle="tab">
+                        <span><i class="glyphicon glyphicon-user"></i></span>
+                    </a>
+                </li>
+                <li rel-index="1">
+                    <a href="#step-2" class="btn disabled" aria-controls="step-2" role="tab" data-toggle="tab">
+                        <span><i class="glyphicon glyphicon-heart"></i></span>
+                    </a>
+                </li>
+                <li rel-index="2">
+                    <a href="#step-3" class="btn disabled" aria-controls="step-3" role="tab" data-toggle="tab">
+                        <span><i class="glyphicon glyphicon-plus"></i></span>
+                    </a>
+                </li>
+                <li rel-index="3">
+                    <a href="#step-4" class="btn disabled" aria-controls="step-4" role="tab" data-toggle="tab">
+                        <span><i class="glyphicon glyphicon-ok"></i></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="step-1">
+                <div class="col-md-12">
+
+
+                    <h3>Business Info</h3>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Business Name</label>
+                            <input  maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Name"  />
                         </div>
                     </div>
-                    <div class="m-progress-stats">
-                        <span class="m-progress-current">
-                        </span>
-                        /
-                        <span class="m-progress-total">
-                        </span>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">EIN (used to verify your business)</label>
+                            <input  maxlength="10" type="text" required="required" class="form-control" placeholder="12-3456789"  />
+                        </div>
                     </div>
-                    <div class="m-progress-complete">
-                        Completed
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="subject">
+                                Type of Business</label>
+                            <select id="subject" name="subject" class="form-control" required="required">
+                                <option value="na" selected="">Choose One:</option>
+                                <option value="service">Restaurant</option>
+                                <option value="suggestions">Shopping</option>
+                                <option value="product">Financial</option>
+                                <option value="product">Retail</option>
+                                <option value="product">Online</option>
+                                <option value="product">Other</option>
+                            </select>
+                        </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Website (option)</label>
+                            <input maxlength="100" type="text"  class="form-control" placeholder="URL" />
+                        </div>
+                    </div>
+                    <h3>Business Location</h3>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Street Adress</label>
+                            <input  maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Address"  />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">City</label>
+                            <input  maxlength="40" type="text" required="required" class="form-control" placeholder="Enter City"  />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">ZIP</label>
+                            <input  maxlength="5" type="text" required="required" class="form-control" placeholder="Enter ZIP Code"  />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">State</label>
+                            <input  maxlength="2" type="text" required="required" class="form-control" placeholder="Enter State"  />
+                        </div>
+                    </div>
+                    <h3>Business Contact</h3>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Phone Number</label>
+                            <input  maxlength="14" type="text" required="required" class="form-control" placeholder="(555) 555-5555"  />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Email</label>
+                            <input  maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Email"  />
+                        </div>
+                    </div>
+
+                    <button id="step-1-next" class="btn btn-lg btn-primary nextBtn pull-right">Next</button>
+
                 </div>
             </div>
-            <div class="modal-body step-1" data-step="1">
-                This is step 1.
+            <div role="tabpanel" class="tab-pane" id="step-2">
+                <div class="col-md-12">
+                    <button id="step-2-next" class="btn btn-lg btn-primary pull-right">Next</button>
+                </div>
             </div>
-            <div class="modal-body step-2" data-step="2">
-                This is the second step.
+            <div role="tabpanel" class="tab-pane" id="step-3">
+                <div class="col-md-12">
+                    <button id="step-3-next" class="btn btn-lg btn-primary pull-right">Next</button>
+                </div>
             </div>
-            <div class="modal-body step-3" data-step="3">
-                This is the final step.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary step step-2" data-step="2" onclick="sendEvent('#demo-modal-3', 1)">Back</button>
-                <button type="button" class="btn btn-primary step step-1" data-step="1" onclick="sendEvent('#demo-modal-3', 2)">Continue</button>
-                <button type="button" class="btn btn-primary step step-3" data-step="3" onclick="sendEvent('#demo-modal-3', 2)">Back</button>
-                <button type="button" class="btn btn-primary step step-2" data-step="2" onclick="sendEvent('#demo-modal-3', 3)">Continue</button>
+            <div role="tabpanel" class="tab-pane" id="step-4">
+                <div class="col-md-12">
+                    <button id="step-4-next" class="btn btn-lg btn-primary pull-right">Continue</button>
+                </div>
             </div>
         </div>
     </div>
-</form>
-        <div class="row">
-        <h1>
-            Progress bar with back buttons
-        </h1>
-        <button class="btn btn-default" data-toggle="modal" data-target="#demo-modal-3">Show</button>
+</div>
+
     </div>
+  </div>
         {% endif %}
     </div>
 </div>

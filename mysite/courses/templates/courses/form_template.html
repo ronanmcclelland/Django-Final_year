@@ -1,6 +1,7 @@
 {% for field in form %}
 
-    <div class="form-group">
+    {% if field.name == 'username' %}
+    <div data-toggle="tooltip" title="This will the name that you will login with" id="username" class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <span class="text-danger small">{{ field.errors }}</span>
         </div>
@@ -8,4 +9,13 @@
         <div class="col-sm-10">{{ field }}</div>
     </div>
 
+    {% else %}
+    <div id="{{ field.name }}" class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <span class="text-danger small">{{ field.errors }}</span>
+        </div>
+        <label class="control-label col-sm-2">{{ field.label_tag }}</label>
+        <div class="col-sm-10">{{ field }}</div>
+    </div>
+    {% endif %}
 {% endfor %}

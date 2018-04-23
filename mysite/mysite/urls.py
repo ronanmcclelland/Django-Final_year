@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^$', include('homepage.urls')),
     url(r'^courses/', include('courses.urls')),
     url(r'^accounts/', include('accounts.urls')),
+    url(r'^fav/', include('fav.urls')),
 ]
 
 if settings.DEBUG:

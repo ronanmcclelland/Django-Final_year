@@ -25,12 +25,12 @@
 
             <ul class="nav nav-pills" style="margin-bottom: 10px;">
                 <li role="presentation"><a href="{% url 'courses:detail' course.id %}">View All</a></li>
-                <li role="presentation" class="active"><a href="{% url 'courses:create_lesson' course.id %}">Add New lesson</a></li>
+                <li role="presentation" class="active"><a href="{% url 'courses:create_lesson' course.id %}">Add New Document</a></li>
             </ul>
 
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h3>Add a New Lesson</h3>
+                    <h3>Add a New Document</h3>
                     {% if error_message %}
                         <p><strong>{{ error_message }}</strong></p>
                     {% endif %}

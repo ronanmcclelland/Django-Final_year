@@ -30,9 +30,13 @@ def register(request):
         user = form.save(commit=False)
         username = form.cleaned_data['username']
         password = form.cleaned_data['password']
-        user.set_password(password)
-        user.save()
-        user = authenticate(username=username, password=password)
+        confirm_pass = form.cleaned_data['password_confirm']
+        if password == confirm_pass:
+            user.set_password(password)
+            user.save()
+            user = authenticate(username=username, password=password)
+        else:
+            return render(request, 'accounts/register.html', {'error_message': 'Password no work', 'form': form})
         if user is not None:
             if user.is_active:
                 login(request, user)
@@ -113,4 +117,3 @@ class TeacherRegView(View):
                     return redirect('courses:index')
 
         return render(request, self.template_name, {'form': form})
-

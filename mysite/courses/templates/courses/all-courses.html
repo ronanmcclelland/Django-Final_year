@@ -4,9 +4,9 @@
 
         {% if courses %}
             {% for course in courses %}
-                <div class="col-sm-4">
+               <div class="col-sm-4">
                    <div class="thumbnail">
-                    <a href="{% url 'courses:other_detail' course.id %}">
+                    <a href="{% url 'courses:detail' course.id %}">
                        <div class="backgroundimg" style="background-image:url({{ course.course_logo.url }})"></div>
                         <div class="card-block">
                             <h2 class="card-title">{{ course.field }}</h2>
